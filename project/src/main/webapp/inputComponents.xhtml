@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Entre your password" />
+                <h:inputSecret binding="#{componentListing.passwordField}" />
+                
+                <h:outputLabel value="This is a input area" />
+                <h:inputTextarea validator="selectValidator" cols="8" rows="10" >
+                    <f:validateLength minimum="10" maximum="20" />
+                </h:inputTextarea>
+
+                <h:outputLabel value="This is a selectOneRadio"/>
+                <h:selectOneRadio converter="#{dessertConverter}" value="#{componentListing.selectedDessert}">
+                    <f:selectItems value="#{dessertDao.desserts}" var="dessert" itemLabel="#{dessert.dessertName}" itemValue="#{dessert}"/>
+                </h:selectOneRadio>
+
+                <h:outputLabel value="This is the selected Radio"/>
+                <h:outputText value="#{componentListing.selectedDessert}" converter="#{dessertConverter}" id="selectedDessert"/>
+                
+                
+                <h:outputLabel value="This is a selectOneMenu"/>
+                <h:selectOneMenu value="#{componentListing.selectOneMenu}">
+                    <f:selectItem noSelectionOption="true" itemLabel="--Please select a dessert--"/>
+                    <f:selectItems value="#{dessertDao.desserts}" var="dessert" itemLabel="#{dessert.dessertName}" itemValue="#{dessert.dessertId}"/>
+                </h:selectOneMenu>
+                <h:outputLabel value="This is a selectListBox"/>
+                <h:selectOneListbox value="#{componentListing.selectListBoxSelection}">
+                    <f:selectItem noSelectionOption="true" itemLabel="--Please select a dessert--"/>
+                    <f:selectItems value="#{dessertDao.desserts}" var="dessert" itemLabel="#{dessert.dessertName}" itemValue="#{dessert.dessertId}"/>
+                </h:selectOneListbox>
+                <h:outputLabel value="This is a selectManyCheckBox"/>
+                <h:selectManyCheckbox value="#{componentListing.selectManyCheckboxSelections}">
+                    <f:selectItem noSelectionOption="true" itemLabel="--Please select a dessert--"/>
+                    <f:selectItems value="#{dessertDao.desserts}" var="dessert" itemLabel="#{dessert.dessertName}" itemValue="#{dessert.dessertId}"/>
+                </h:selectManyCheckbox>
+                <h:outputLabel value="This is a Command Button"/>
+                <h:commandButton value="Pass a parameter" action="#{componentListing.acceptAString('A JSF Tutorial')}" />
+                <h:outputLabel value="This is a cookie obj"/>
+                #{cookie}
+                <h:outputLabel value="This is money input (BigDecimal)"/>
+                <h:inputText value="#{componentListing.moneyInput}" converterMessage="Isso não é money: #{component.getSubmittedValue()}" converter="javax.faces.BigDecimal" id="bigDecimalInput"/>
+                <h:outputLabel value="This is money output (BigDecimal)"/>
+                <h:outputText escape="true" value="#{componentListing.moneyInput}" converter="javax.faces.BigDecimal" id="bigDecimalOutput"/>
+                
+                <h:outputLabel value="Submit this form"/>
+                <h:commandButton value="Submit"/>
+                
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
